@@ -6,16 +6,22 @@ import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
 import clientRoutes from "./routes/client.js";
-import generalRoutes from "./routes/general.js"
-import managementRoutes from "./routes/management.js"
-import salesRoutes from "./routes/sales.js"
+import generalRoutes from "./routes/general.js";
+import managementRoutes from "./routes/management.js";
+import salesRoutes from "./routes/sales.js";
 
 // data imports
 import User from "./models/User.js";
 import Product from "./models/Product.js";
 import ProductStat from "./models/ProductStat.js";
+import Transaction from "./models/Transaction.js";
 
-import { dataUser, dataProduct, dataProductStat } from "./data/index.js"
+import {
+  dataUser,
+  dataProduct,
+  dataProductStat,
+  dataTransaction,
+} from "./data/index.js";
 
 // CONFIGURATION
 dotenv.config();
@@ -32,18 +38,21 @@ app.use(cors());
 app.use("/client", clientRoutes);
 app.use("/general", generalRoutes);
 app.use("/management", managementRoutes);
-app.use("/sales", salesRoutes)
+app.use("/sales", salesRoutes);
 
 // MONGOOSE SETUP
-const PORT = process.env.PORT || 9000
-mongoose.connect(process.env.MONGO_URL, {
+const PORT = process.env.PORT || 9000;
+mongoose
+  .connect(process.env.MONGO_URL, {
     // useNewUrlParse: true,
     // useUnifiedTopology: true
-}).then(() => {
-    app.listen(PORT, () => console.log(`Server Port : ${PORT}`))
+  })
+  .then(() => {
+    app.listen(PORT, () => console.log(`Server Port : ${PORT}`));
     /* ONLY ADD DATA ONE TIME */
     // Product.insertMany(dataProduct)
     // ProductStat.insertMany(dataProductStat)
     // User.insertMany(dataUser)
-
-}).catch((error) => console.log(error.message))
+    // Transaction.insertMany(dataTransaction);
+  })
+  .catch((error) => console.log(error.message));
