@@ -15,12 +15,14 @@ import User from "./models/User.js";
 import Product from "./models/Product.js";
 import ProductStat from "./models/ProductStat.js";
 import Transaction from "./models/Transaction.js";
+import OverallStat from "./models/OverallStat.js";
 
 import {
   dataUser,
   dataProduct,
   dataProductStat,
   dataTransaction,
+  dataOverallStat,
 } from "./data/index.js";
 
 // CONFIGURATION
@@ -51,8 +53,9 @@ mongoose
     app.listen(PORT, () => console.log(`Server Port : ${PORT}`));
     /* ONLY ADD DATA ONE TIME */
     // Product.insertMany(dataProduct)
-    // ProductStat.insertMany(dataProductStat)
+    // ProductStat.insertMany(dataProductStat);
     // User.insertMany(dataUser)
     // Transaction.insertMany(dataTransaction);
+    // OverallStat.insertMany(dataOverallStat);
   })
   .catch((error) => console.log(error.message));
